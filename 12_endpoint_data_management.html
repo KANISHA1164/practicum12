@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CodeNest API Lab</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: lightblue;
+            padding: 20px;
+        }
+
+        button {
+            background: blue;
+            color: white;
+            padding: 10px;
+        }
+
+        #output {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CodeNest API Data</h1>
+
+    <p>Click to fetch user data</p>
+
+    <button onclick="loadUsers()">Fetch Data</button>
+
+    <div id="output">
+        API results will appear here.
+    </div>
+
+    <script>
+
+        async function loadUsers() {
+
+            let output = document.getElementById("output");
+
+            output.innerHTML = "Loading...";
+
+            try {
+
+                let response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+                let users = await response.json();
+
+                output.innerHTML = "";
+
+                users.slice(0, 5).forEach(user => {
+
+                    output.innerHTML += "<p>" + user.name + " - " + user.email + "</p>";
+
+                });
+
+            }
+
+            catch (error) {
+
+                output.innerHTML = "Unable to load data";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
